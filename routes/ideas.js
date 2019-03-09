@@ -10,11 +10,11 @@ const Idea = mongoose.model('ideas');
 router.get('/', (req, res) => {
     Idea.find({
         user: req.user.id
+    }).sort({
+        date: 'desc'
     }).then(ideas => {
         res.render('ideas/index', {
-            ideas: ideas.sort({
-                date: 'desc'
-            })
+            ideas: ideas
         });
     });
 });
