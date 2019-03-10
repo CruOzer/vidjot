@@ -1,3 +1,5 @@
+const dotenv = require('dotenv');
+dotenv.config();
 const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
@@ -16,12 +18,11 @@ const users = require('./routes/users');
 
 // Passport Config
 require('./config/passport')(passport);
-// DB Config
-const db = require('./config/database');
+
 // Map global promise - get rid of warning
 mongoose.Promise = global.Promise;
 // Connect to mongoose
-mongoose.connect(db.mongoURI, {
+mongoose.connect(process.env.MONGO_URI, {
         // useNewUrlParser: true        
         useMongoClient: true
     })
